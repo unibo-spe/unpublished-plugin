@@ -19,10 +19,6 @@ import java.io.File
 
 class Tests : StringSpec(
     {
-        val testkitProperties = javaClass.classLoader.getResource("testkit-gradle.properties")?.readText()
-        checkNotNull(testkitProperties) {
-            "No file testkit-gradle.properties was generated"
-        }
         val scan = ClassGraph()
             .enableAllInfo()
             .acceptPackages(Tests::class.java.`package`.name)
@@ -43,7 +39,6 @@ class Tests : StringSpec(
                 }
                 log.debug("Test has been copied into {} and is ready to get executed", testFolder)
                 test.description {
-                    File(testFolder.root, "gradle.properties").writeText(testkitProperties)
                     val result = GradleRunner.create()
                         .withProjectDir(testFolder.root)
                         .withPluginClasspath()

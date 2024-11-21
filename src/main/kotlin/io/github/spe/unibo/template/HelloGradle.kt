@@ -1,4 +1,4 @@
-package org.danilopianini.template
+package io.github.spe.unibo.template
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.Plugin
