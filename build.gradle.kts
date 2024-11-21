@@ -3,12 +3,17 @@ plugins {
     `java-gradle-plugin`
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.multiJvmTesting)
+    alias(libs.plugins.gitSemVer)
 }
 
 group = "io.github.spe.unibo"
 
 repositories {
     mavenCentral()
+}
+
+gitSemVer {
+    buildMetadataSeparator = "-"
 }
 
 multiJvm {
