@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.multiJvmTesting)
     alias(libs.plugins.gitSemVer)
     alias(libs.plugins.gradlePluginPublish)
+    alias(libs.plugins.kotlin.qa)
 }
 
 group = "io.github.spe.unibo"
@@ -29,6 +30,12 @@ dependencies {
     testImplementation(libs.konf.yaml)
     testImplementation(libs.classgraph)
     testImplementation(libs.bundles.kotlin.testing)
+}
+
+kotlin {
+    compilerOptions {
+        allWarningsAsErrors = true
+    }
 }
 
 tasks.withType<Test>().configureEach {

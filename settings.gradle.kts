@@ -6,6 +6,9 @@ plugins {
 rootProject.name = "spe-helloworld-plugin"
 
 gitHooks {
+    preCommit {
+        tasks("ktlintFormat", "ktlintCheck", "detekt")
+    }
     commitMsg { conventionalCommits() }
     createHooks(overwriteExisting = true)
 }
