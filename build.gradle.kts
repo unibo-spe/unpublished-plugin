@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.multiJvmTesting)
     alias(libs.plugins.gitSemVer)
+    alias(libs.plugins.gradlePluginPublish)
 }
 
 group = "io.github.spe.unibo"
@@ -43,12 +44,12 @@ tasks.withType<Test>().configureEach {
 
 gradlePlugin {
     plugins {
-        website.set("unibo-spe.github.io")
-        vcsUrl.set("scm:git:$website.git")
+        website.set("https://unibo-spe.github.io")
+        vcsUrl.set("https://github.com/unibo-spe/unpublished-plugin")
         create("") {
             id = "$group.${project.name}"
             displayName = "SPE test plugin"
-            description = project.description
+            description = "Just a test plugin"
             implementationClass = "$group.template.HelloGradle"
             tags = listOf("unibo", "spe", "software process engineering", "teaching", "educational")
         }
