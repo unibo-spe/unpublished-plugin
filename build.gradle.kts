@@ -1,11 +1,15 @@
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     `java-gradle-plugin`
+    signing
+    `maven-publish`
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.multiJvmTesting)
     alias(libs.plugins.gitSemVer)
     alias(libs.plugins.gradlePluginPublish)
     alias(libs.plugins.kotlin.qa)
+    alias(libs.plugins.dokka)
+    alias(libs.plugins.taskTree)
 }
 
 group = "io.github.spe.unibo"
