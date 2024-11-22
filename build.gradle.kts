@@ -1,4 +1,5 @@
-@Suppress("DSL_SCOPE_VIOLATION")
+import com.gradle.publish.PublishTask
+
 plugins {
     `java-gradle-plugin`
     signing
@@ -65,4 +66,46 @@ gradlePlugin {
             tags = listOf("unibo", "spe", "software process engineering", "teaching", "educational")
         }
     }
+}
+
+val localRepo = project.layout.buildDirectory.dir("myublish").get().asFile
+
+publishing {
+    repositories {
+        maven {
+            name = "MyRepo"
+            url = localRepo.toURI()
+        }
+    }
+    publications {
+        create<MavenPublication>("Pluto") {
+            from(components["java"])
+            pom {
+                name.set("SPE test plugin")
+                description.set("Just a test plugin")
+                url.set("https://unibo-spe.github.io")
+                scm {
+                    connection.set("scm:git:git@github.com/....")
+                }
+                licenses {
+                    license {
+                        name.set("MIT License")
+                        url.set("https://opensource.org/licenses/MIT")
+                    }
+                }
+                developers {
+                    developer {
+                        id.set("danilopianini")
+                        name.set("Danilo Pianini")
+                    }
+                }
+            }
+        }
+    }
+}
+
+val zipDistribution by tasks.registering(Zip::class) {
+    archiveBaseName.set("central-distribution")
+    from(localRepo)
+    dependsOn(tasks.withType<PublishTask>().matching { "MyRepo" in it.name })
 }
