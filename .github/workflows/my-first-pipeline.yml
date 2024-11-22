@@ -1,0 +1,12 @@
+name: SPE CI-CD
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Build with Gradle
+        run: ./gradlew build --parallel
