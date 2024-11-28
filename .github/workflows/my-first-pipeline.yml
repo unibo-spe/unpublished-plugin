@@ -16,5 +16,7 @@ jobs:
         uses: actions/checkout@v4.2.2
       - name: Print the operating system (spoiler, it is ${{ runner.os }})
         run: echo ${{ runner.os }}
+      - name: Print the project version
+        run: ./gradlew printGitSemVer
       - name: Build with Gradle
         run: ./gradlew build --parallel
