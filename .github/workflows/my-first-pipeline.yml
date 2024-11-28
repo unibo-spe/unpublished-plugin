@@ -14,6 +14,10 @@ jobs:
     steps:
       - name: Checkout the code
         uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
+          fetch-tags: 'true'
+          submodules: 'true'
       - name: Print the operating system (spoiler, it is ${{ runner.os }})
         run: echo ${{ runner.os }}
       - name: Print the project version
