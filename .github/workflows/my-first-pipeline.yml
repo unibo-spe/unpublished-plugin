@@ -10,7 +10,13 @@ defaults:
 
 jobs:
   build:
-    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        our-os:
+          - ubuntu-24.04
+          - windows-2022
+          - macos-14
+    runs-on: ${{ matrix.our-os }}
     steps:
       - name: Checkout the code
         uses: actions/checkout@v4.2.2
@@ -18,7 +24,7 @@ jobs:
           fetch-depth: 0
           fetch-tags: 'true'
           submodules: 'true'
-      - name: Print the operating system (spoiler, it is ${{ runner.os }})
+      - name: Print the operating system (spoiler, it is ${{ runner.os }}, beacause we are running on ${{ matrix.our-os }})
         run: echo ${{ runner.os }}
       - name: Print the project version
         run: ./gradlew printGitSemVer
