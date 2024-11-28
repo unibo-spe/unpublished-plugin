@@ -4,11 +4,17 @@ on:
   push:
   pull_request:
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   build:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout the code
         uses: actions/checkout@v4.2.2
+      - name: Print the operating system (spoiler, it is ${{ runner.os }})
+        run: echo ${{ runner.os }}
       - name: Build with Gradle
         run: ./gradlew build --parallel
