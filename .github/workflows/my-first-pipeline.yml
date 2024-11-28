@@ -16,6 +16,7 @@ jobs:
           - ubuntu-24.04
           - windows-2022
           - macos-14
+      fail-fast: false
     runs-on: ${{ matrix.our-os }}
     steps:
       - name: Checkout the code
