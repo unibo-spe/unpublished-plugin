@@ -17,6 +17,20 @@ jobs:
           - windows-2022
           - macos-14
         java-version: [ '8', '11', '17', '21' ]
+        exclude:
+          - our-os: ubuntu-24.04
+            java-version: '8'
+          - our-os: windows-2022
+            java-version: '8'
+          - our-os: macos-14
+            java-version: '8'
+          - our-os: macos-14
+            java-version: '17'
+          - our-os: windows-2022
+            java-version: '17'
+        include:
+          - our-os: ubuntu-24.04
+            java-version: '23'
       fail-fast: false
     runs-on: ${{ matrix.our-os }}
     steps:
