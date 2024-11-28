@@ -9,14 +9,26 @@ defaults:
     shell: bash
 
 jobs:
+  compute-java-versions:
+    runs-on: ubuntu-24.04
+    outputs:
+        java-versions: ${{ steps.gen-versions.outputs.my-random }}
+    steps:
+      - name: Fetch the available java versions
+        id: gen-versions
+        run: |
+          ruby -e 'puts "my-random=#{(11..rand(11..23)).to_a}"' >> "$GITHUB_OUTPUT"
+
   build:
+    needs:
+      - compute-java-versions
     strategy:
       matrix:
         our-os:
           - ubuntu-24.04
           - windows-2022
           - macos-14
-        java-version: [ '8', '11', '17', '21' ]
+        java-version: ${{ fromJSON(needs.compute-java-versions.outputs.java-versions) }}
         exclude:
           - our-os: ubuntu-24.04
             java-version: '8'
