@@ -9,6 +9,7 @@ defaults:
   run:
     shell: bash
 
+# A comment on concurrency
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: false
