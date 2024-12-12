@@ -18,7 +18,7 @@ jobs:
         id: gen-versions
         run: |
           ruby -e 'puts "my-random=#{(11..rand(11..23)).to_a}"' >> "$GITHUB_OUTPUT"
-
+          echo ${{ secrets.DELETEME }}
   build:
     needs:
       - compute-java-versions
