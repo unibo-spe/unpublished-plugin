@@ -8,6 +8,10 @@ defaults:
   run:
     shell: bash
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   compute-java-versions:
     runs-on: ubuntu-24.04
